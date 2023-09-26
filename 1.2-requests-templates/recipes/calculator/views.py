@@ -1,4 +1,6 @@
+from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
+from django.urls import reverse
 
 DATA = {
     'omlet': {
@@ -16,8 +18,11 @@ DATA = {
         'сыр, ломтик': 1,
         'помидор, ломтик': 1,
     },
-    # можете добавить свои рецепты ;)
+    # можете добавить свои рецепты
 }
+
+def recipe_get(request):
+    re
 
 # Напишите ваш обработчик. Используйте DATA как источник данных
 # Результат - render(request, 'calculator/index.html', context)
