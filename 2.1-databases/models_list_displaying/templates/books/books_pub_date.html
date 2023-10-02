@@ -16,5 +16,13 @@
                  </div>
              {% endfor %}
         </div>
+        <div class="row">
+            {% if previous_date %}
+            <a href = '{% url 'books' %}{{ previous_date }}' style="margin:10px"><{{ previous_date }}</a>
+            {% endif %}
+            {% if next_date %}
+            <a href = '{% url 'books' %}{{ next_date }}' style="margin:10px">  {{ next_date }}></a>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
