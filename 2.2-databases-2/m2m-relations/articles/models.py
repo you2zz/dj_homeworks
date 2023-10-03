@@ -1,12 +1,24 @@
 from django.db import models
 
 
-class Article(models.Model):
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Раздел'
+        verbose_name_plural = 'Разделы'
+        ordering = ['name']
+
+
+class Article(models.Model):
     title = models.CharField(max_length=256, verbose_name='Название')
     text = models.TextField(verbose_name='Текст')
     published_at = models.DateTimeField(verbose_name='Дата публикации')
-    image = models.ImageField(null=True, blank=True, verbose_name='Изображение',)
+    image = models.ImageField(null=True, blank=True, verbose_name='Изображение', )
+    tags = models.ManyToManyField(Tag, related_name='tags', through='Scope')
 
     class Meta:
         verbose_name = 'Статья'
@@ -17,12 +29,11 @@ class Article(models.Model):
         return self.title
 
 
-class Tag(models.Model):
-    name = models.CharField(max_length=50)
-    articles = models.ManyToManyField(Article, related_name='tags', through='Scope')
-
-
 class Scope(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='scopes')
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name='scopes')
-    is_main = models.BooleanField()
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name='scopes', verbose_name='Раздел')
+    is_main = models.BooleanField(verbose_name='Основной')
+
+    class Meta:
+        verbose_name_plural = 'Тематики статьи'
+        ordering = ['-is_main', 'tag__name']
