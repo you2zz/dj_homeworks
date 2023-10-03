@@ -21,7 +21,6 @@ class ScopeInlineFormset(BaseInlineFormSet):
         return super().clean()
 
 
-
 class ScopeInline(admin.TabularInline):
     model = Scope
     formset = ScopeInlineFormset
@@ -33,6 +32,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'text', 'published_at', 'image']
     list_filter = ['published_at']
     inlines = [ScopeInline, ]
+
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
