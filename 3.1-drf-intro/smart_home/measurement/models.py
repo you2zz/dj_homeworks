@@ -11,4 +11,5 @@ class Sensor(models.Model):
 class Measurement(models.Model):
     sensor = models.ForeignKey(Sensor, related_name='measurements', on_delete=models.CASCADE)
     temperature = models.DecimalField(max_digits=4, decimal_places=2)
-    created_at = models.DateField()
+    created_at = models.DateTimeField(auto_now=True)
+    image = models.ImageField(blank=True)
