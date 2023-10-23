@@ -76,7 +76,15 @@ TEMPLATES = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-    ]
+    ],
+    'DEFAULT_THROTTLE_CLASSES': [
+        # 'rest_framework.throttling.UserRateThrottle',  # троттлинг по пользователю для всех вьюсетов
+        # 'rest_framework.throttling.AnonRateThrottle',  # троттлинг по анонимности для всех вьюсетов
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'user': '20/minute',  # для зарегистрированных пользователей 20 запросов в минуту
+        'anon': '10/minute',  # для анонимных пользователей 10 запросов в минуту
+    },
 }
 
 WSGI_APPLICATION = 'api_with_restrictions.wsgi.application'
@@ -134,4 +142,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
