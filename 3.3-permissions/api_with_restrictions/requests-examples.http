@@ -4,7 +4,7 @@
 
 # получение объявлений
 GET {{baseUrl}}/advertisements/
-Authorization: Token 16d532753311489859767df6a42b38fb15128679
+Authorization: Token e7c35f421cd701c22edfe5748788cd83c93c3a15
 Content-Type: application/json
 
 ###
@@ -12,7 +12,7 @@ Content-Type: application/json
 # создание объявления
 POST {{baseUrl}}/advertisements/
 Content-Type: application/json
-Authorization: Token 16d532753311489859767df6a42b38fb15128679
+Authorization: Token e7c35f421cd701c22edfe5748788cd83c93c3a15
 
 {
   "title": "Шкаф IKEA13",
@@ -22,12 +22,12 @@ Authorization: Token 16d532753311489859767df6a42b38fb15128679
 ###
 
 # попытка поменять объявление
-PATCH {{baseUrl}}/advertisements/26/
+PATCH {{baseUrl}}/advertisements/41/
 Content-Type: application/json
-Authorization: 16d532753311489859767df6a42b38fb15128679
+Authorization: Token e7c35f421cd701c22edfe5748788cd83c93c3a15
 
 {
-  "status": "CLOSED"
+  "status": "OPEN"
 }
 
 ###
@@ -48,4 +48,30 @@ Content-Type: application/json
 GET {{baseUrl}}/advertisements/?status=OPEN
 Content-Type: application/json
 
+###
 
+# удаление объявления
+DELETE {{baseUrl}}/advertisements/29/
+Authorization: Token e7c35f421cd701c22edfe5748788cd83c93c3a15
+
+###
+
+# добавить в избранное
+POST {{baseUrl}}/favorite/
+Content-Type: application/json
+Authorization: Token e7c35f421cd701c22edfe5748788cd83c93c3a15
+
+{
+  "advertisements": "3"
+}
+###
+
+# добавить в избранное
+GET {{baseUrl}}/favorite/?user=3
+Content-Type: application/json
+Authorization: Token e7c35f421cd701c22edfe5748788cd83c93c3a15
+
+{
+  "advertisements": "3"
+}
+###

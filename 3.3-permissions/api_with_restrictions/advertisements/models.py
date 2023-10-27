@@ -29,4 +29,16 @@ class Advertisement(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
-    # users_add_favourite = models.ManyToManyField(User, related_name='favourites')
+
+
+class Favorite(models.Model):
+    """Избранное"""
+
+    advertisement = models.ForeignKey(
+        Advertisement,
+        on_delete=models.CASCADE,
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
