@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from advertisements.models import Advertisement
+from advertisements.models import Advertisement, Favorite
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -23,7 +23,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Advertisement
         fields = ('id', 'title', 'description', 'creator',
-                  'status', 'created_at', )
+                  'status', 'created_at',)
 
     def create(self, validated_data):
         """Метод для создания"""
@@ -51,3 +51,23 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             print(data.get('status'))
             raise serializers.ValidationError('Превышено количество объявлений со статусом "Открыто"')
         return data
+
+
+class FavoriteSerializer(serializers.ModelSerializer):
+    user = UserSerializer(
+        read_only=True,
+    )
+    advertisement = AdvertisementSerializer(
+        read_only=True
+    )
+
+    class Meta:
+        model = Favorite
+        fields = ('user', 'advertisement',)
+
+    def create(self, validated_data):
+        print(self.context['request'])
+        """Метод для создания"""
+        validated_data['user'] = self.context['request'].user
+        validated_data['advertisement'] = self.context['request']['advertisement']
+        return super().create(validated_data)

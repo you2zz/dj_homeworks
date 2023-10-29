@@ -1,6 +1,6 @@
 from django_filters import rest_framework as filters
 
-from advertisements.models import Advertisement
+from advertisements.models import Advertisement, Favorite
 
 
 class AdvertisementFilter(filters.FilterSet):
@@ -12,3 +12,11 @@ class AdvertisementFilter(filters.FilterSet):
     class Meta:
         model = Advertisement
         fields = ['created_at', 'status']
+
+
+class FavoriteFilter(filters.FilterSet):
+    """Фильтр избранного"""
+
+    class Meta:
+        model = Favorite
+        fields = ['user', ]
