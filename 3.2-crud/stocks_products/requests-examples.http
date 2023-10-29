@@ -7,7 +7,7 @@ POST {{baseUrl}}/products/
 Content-Type: application/json
 
 {
-  "title": "Арбуз",
+  "title": "Арбуз7",
   "description": "Лучшые арбузы на рынке"
 }
 
@@ -76,7 +76,7 @@ Content-Type: application/json
     },
     {
       "product": 3,
-      "quantity": 243,
+      "quantity": 242,
       "price": 145
     }
   ]
