@@ -29,17 +29,17 @@ class AdvertisementViewSet(ModelViewSet):
             return [IsAuthenticated(), IsOwnerOrReadOnly()]
         return []
 
-
-class FavoriteViewSet(ModelViewSet):
-    """ViewSet для избранного."""
-    queryset = Favorite.objects.all()
-    serializer_class = FavoriteSerializer
-    permission_classes = [IsAuthenticated, IsNotOwner]
-    filter_backends = [DjangoFilterBackend]
-    filterset_class = FavoriteFilter
-
-    def get_permissions(self):
-        """Получение прав для действий."""
-        if self.action in ['create', 'destroy']:
-            return [IsAuthenticated(), IsNotOwner()]
-        return []
+#
+# class FavoriteViewSet(ModelViewSet):
+#     """ViewSet для избранного."""
+#     queryset = Favorite.objects.all()
+#     serializer_class = FavoriteSerializer
+#     permission_classes = [IsAuthenticated, IsNotOwner]
+#     filter_backends = [DjangoFilterBackend]
+#     filterset_class = FavoriteFilter
+#
+#     def get_permissions(self):
+#         """Получение прав для действий."""
+#         if self.action in ['create', 'destroy']:
+#             return [IsAuthenticated(), IsNotOwner()]
+#         return []

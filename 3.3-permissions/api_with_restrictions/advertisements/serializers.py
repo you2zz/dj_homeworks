@@ -51,23 +51,23 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             print(data.get('status'))
             raise serializers.ValidationError('Превышено количество объявлений со статусом "Открыто"')
         return data
-
-
-class FavoriteSerializer(serializers.ModelSerializer):
-    user = UserSerializer(
-        read_only=True,
-    )
-    advertisement = AdvertisementSerializer(
-        read_only=True
-    )
-
-    class Meta:
-        model = Favorite
-        fields = ('user', 'advertisement',)
-
-    def create(self, validated_data):
-        print(self.context['request'])
-        """Метод для создания"""
-        validated_data['user'] = self.context['request'].user
-        validated_data['advertisement'] = self.context['request']['advertisement']
-        return super().create(validated_data)
+#
+#
+# class FavoriteSerializer(serializers.ModelSerializer):
+#     user = UserSerializer(
+#         read_only=True,
+#     )
+#     advertisement = AdvertisementSerializer(
+#         read_only=True
+#     )
+#
+#     class Meta:
+#         model = Favorite
+#         fields = ('user', 'advertisement',)
+#
+#     def create(self, validated_data):
+#         print(self.context['request'])
+#         """Метод для создания"""
+#         validated_data['user'] = self.context['request'].user
+#         validated_data['advertisement'] = self.context['request']['advertisement']
+#         return super().create(validated_data)
