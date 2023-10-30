@@ -6,9 +6,9 @@ from rest_framework.viewsets import ModelViewSet
 # from django_filters import rest_framework as filters
 
 from advertisements.filters import AdvertisementFilter, FavoriteFilter
-from advertisements.models import Advertisement, Favorite
+from advertisements.models import Advertisement
 from advertisements.permission import IsOwnerOrReadOnly, IsNotOwner
-from advertisements.serializers import AdvertisementSerializer, FavoriteSerializer
+from advertisements.serializers import AdvertisementSerializer
 
 
 class CustomSearchFilter:
